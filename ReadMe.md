@@ -88,6 +88,47 @@ $ ./busybox-s390x uname -m
 s390x
 ```
 
+## Simple benchmark
+Simple benchmark run on an Oracle Cloud ARM instance with 4C4T CPU + 24GB RAM, which is 4 CPU of 'VM.Standard.A1.Flex'.
+
+Compressed bzip2 data file is 156MB, uncompressed to 9.6G raw text files
+```
+$ ls -l 2021-08-13_08-50-01.tar.bz2
+-rw-r--r-- 1 root root 163405614 Aug 30 14:38 2021-08-13_08-50-01.tar.bz2
+```
+
+Decomress on the aarch64 host, 4C4T VM.Standard.A1.Flex on Oracle Cloud free tier.
+```
+$ time pbzip2 -k -c -d 2021-08-13_08-50-01.tar.bz2 > /dev/null
+
+real    0m19.739s
+user    1m17.713s
+sys     0m0.372s
+```
+
+Run an docker container with amd64/centos:8
+```
+docker run -it --rm amd64/centos:8
+```
+
+Decomress on the amd64 container run on aarch64 host, emulated by this *multiarch-on-aarch64* project.
+```
+$ time pbzip2 -k -c -d 2021-08-13_08-50-01.tar.bz2 > /dev/null
+
+real    2m23.367s
+user    9m29.631s
+sys     0m0.707s
+```
+
+The same data file unpacked on a single Intel E5-2667v2 (8C16T 4.0GHz) + 128GB RAM computer, which running CentOS7
+```
+$ time pbzip2 -k -c -d 2021-08-13_08-50-01.tar.bz2 > /dev/null
+
+real    0m9.044s
+user    1m52.792s
+sys     0m10.674s
+```
+
 ## References
 
 * [1] QEMU: https://www.qemu.org/
