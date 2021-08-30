@@ -1,6 +1,6 @@
 # multiarch-on-aarch64
 
-**multiarch-on-aarch64** is to enable an execution of different multi-architecture containers / programs by QEMU [1] and binfmt_misc [2]. It is very similar to qemu-user-static [3]. The main difference is that *multiarch-on-aarch64* works on aarch64 hosts while *qemu-user-static* works on x86_64 hosts.
+**multiarch-on-aarch64** is to enable an execution of different multi-architecture containers / programs by QEMU [1] and binfmt_misc [2]. It is very similar to multiarch/qemu-user-static [3]. The main difference is that *multiarch-on-aarch64* works on aarch64 hosts while *multiarch/qemu-user-static* works on x86_64 hosts.
 
 Here are examples with Docker [4].
 
@@ -92,5 +92,5 @@ s390x
 
 * [1] QEMU: https://www.qemu.org/
 * [2] binfmt_misc: https://www.kernel.org/doc/html/latest/admin-guide/binfmt-misc.html
-* [3] qemu-user-static: https://raw.githubusercontent.com/multiarch/qemu-user-static/
+* [3] multiarch/qemu-user-static: https://github.com/multiarch/qemu-user-static/
 * [4] Docker: https://www.docker.com/
